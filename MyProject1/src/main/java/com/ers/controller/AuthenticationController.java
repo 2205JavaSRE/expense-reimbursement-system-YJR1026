@@ -16,6 +16,8 @@ public class AuthenticationController {
 		
 		
 			Employee u = ctx.bodyAsClass(Employee.class);
+			//String username = ctx.formParam("username");
+			//String password = ctx.formParam("password");
 			
 			ctx.sessionAttribute("user",u);
 			
@@ -37,6 +39,12 @@ public class AuthenticationController {
 		ctx.consumeSessionAttribute("user");
 		
 	}
+	
+	public static Employee getEmployee(Context ctx) {
+		Employee employee = ctx.sessionAttribute("user");
+		return employee;
+	}
+	
 	public static boolean sessionCheck(Context ctx) {
 		
 		Employee u = ctx.sessionAttribute("user");
@@ -84,6 +92,11 @@ public class AuthenticationController {
 		
 	}
 	
+	public static Manager getManager (Context ctx) {
+		Manager manager = ctx.sessionAttribute("manager");
+		return manager;
+	}
+	
 	public static boolean managerCheck(Context ctx) {
 
 		Manager m = ctx.sessionAttribute("manager");
@@ -99,7 +112,6 @@ public class AuthenticationController {
 			ctx.status(HttpStatus.ACCEPTED_202);
 		}
 	return access;
-		
-		
+			
 	}
 }

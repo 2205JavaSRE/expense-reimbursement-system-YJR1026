@@ -11,12 +11,9 @@ public class Reimbursement {
 	private String expenseType;
 	private String paymentStatus;
 	
-	
 	public Reimbursement() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
 
 	public Reimbursement(int reimbursementId, int userid, String username, double totalCost, String expenseType,
 			String paymentStatus) {
@@ -29,72 +26,58 @@ public class Reimbursement {
 		this.paymentStatus = paymentStatus;
 	}
 
-
 	public int getReimbursementId() {
 		return reimbursementId;
 	}
-
 
 	public void setReimbursementId(int reimbursementId) {
 		this.reimbursementId = reimbursementId;
 	}
 
-
 	public int getUserid() {
 		return userid;
 	}
-
 
 	public void setUserid(int userid) {
 		this.userid = userid;
 	}
 
-
 	public String getUsername() {
 		return username;
 	}
-
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-
 	public double getTotalCost() {
 		return totalCost;
 	}
-
 
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
 
-
 	public String getExpenseType() {
 		return expenseType;
 	}
-
 
 	public void setExpenseType(String expenseType) {
 		this.expenseType = expenseType;
 	}
 
-
 	public String getPaymentStatus() {
 		return paymentStatus;
 	}
-
 
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(expenseType, paymentStatus, reimbursementId, totalCost, userid, username);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -111,16 +94,11 @@ public class Reimbursement {
 				&& userid == other.userid && Objects.equals(username, other.username);
 	}
 
-
 	@Override
 	public String toString() {
 		return "Reimbursment [reimbursementId=" + reimbursementId + ", userid=" + userid + ", username=" + username
 				+ ", totalCost=" + totalCost + ", expenseType=" + expenseType + ", paymentStatus=" + paymentStatus
 				+ "]";
 	}
-
-
-	
-	
 
 }

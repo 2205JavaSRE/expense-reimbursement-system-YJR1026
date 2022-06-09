@@ -20,11 +20,13 @@ public class ReimbursementController {
 		
 		Reimbursement jsonReimbursement =ctx.bodyAsClass(Reimbursement.class);
 		
-		rService.requestSubmit(jsonReimbursement.getUsername(), jsonReimbursement.getTotalCost(),jsonReimbursement.getExpenseType(),jsonReimbursement.getPaymentStatus());
+		Employee employee = AuthenticationController.getEmployee(ctx);
+		
+		rService.requestSubmit(employee, jsonReimbursement.getTotalCost(),jsonReimbursement.getExpenseType(),jsonReimbursement.getPaymentStatus());
 		
 		ctx.status(201);
 		ctx.status(HttpCode.CREATED);
-		ctx.result("New Reimbursement submitted by: " + jsonReimbursement.getUsername());
+		ctx.result("New Reimbursement submitted by: " + employee.getUsername());
 		
 		
 		

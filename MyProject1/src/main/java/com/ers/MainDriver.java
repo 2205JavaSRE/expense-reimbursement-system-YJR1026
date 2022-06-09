@@ -39,7 +39,6 @@ public class MainDriver {
 
 		Javalin app = Javalin.create(config -> {config.registerPlugin(new MicrometerPlugin(registry));}).start(8001);
 		
-		
 		RequestMapper requestMapper = new RequestMapper();
 		requestMapper.configureRoutes(app);
 		

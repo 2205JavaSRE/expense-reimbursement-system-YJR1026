@@ -17,11 +17,9 @@ import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 public class RequestMapper {
 	
-	private ReimbursementController rController = new ReimbursementController();
-	
+	private ReimbursementController rController = new ReimbursementController();	
 	
 	public void configureRoutes(Javalin app) {
-		
 		
 		PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 		registry.config().commonTags("application","ERS-Monitoring");
@@ -39,16 +37,11 @@ public class RequestMapper {
 		Counter counter2 = Counter.builder("Path_request").description("track number").tag("purpose", "login").register(registry);
 		Counter counter3 = Counter.builder("Path_request").description("track number").tag("purpose", "reimbursement_check").register(registry);
 		
-		
-
 		app.get("/metrics", ctx->{
 			ctx.result(registry.scrape());
 			
 		});
-		
-		
-		
-		
+			
 		app.post("/api/requestSubmit", ctx ->{
 
 			boolean access = AuthenticationController.sessionCheck(ctx);
@@ -58,14 +51,11 @@ public class RequestMapper {
 				counter.increment(1);
 			}else {
 				ctx.status(HttpCode.FORBIDDEN);
-			}
-			
-			
+			}	
 			
 		} );
 		
-		app.get("/api/reimbursements",ctx->{
-			
+		app.get("/api/reimbursements",ctx->{			
 			
 			boolean access = AuthenticationController.managerCheck(ctx);
 			
@@ -92,12 +82,10 @@ public class RequestMapper {
 			
 			AuthenticationController.sessionCheck(ctx);
 		});
-		
-		
+			
 		app.get("/reimbursement/{username}/{status}", ctx->{
 			
-			
-			
+						
 			boolean access = AuthenticationController.sessionCheck(ctx);
 			
 			if(access) {
@@ -105,9 +93,7 @@ public class RequestMapper {
 			}else {
 				ctx.status(HttpCode.FORBIDDEN);
 			}
-			
-			
-			
+						
 		});
 		
 		app.get("/reimbursement/{username}", ctx->{
@@ -119,12 +105,10 @@ public class RequestMapper {
 				counter3.increment(1);
 			}else {
 				ctx.status(HttpCode.FORBIDDEN);
-			}
-			
+			}		
 			
 		});
-		
-		
+				
 		app.post("/mlogin", ctx -> {
 			
 			AuthenticationController.authenticateManager(ctx);
@@ -135,13 +119,10 @@ public class RequestMapper {
 			
 			AuthenticationController.logoutManager(ctx);
 
-		});
-		
+		});		
 		
 		app.get("/manager/{username}/{status}", ctx->{
-			
-			
-			
+								
 			boolean access = AuthenticationController.managerCheck(ctx);
 			
 			if(access) {
@@ -149,9 +130,7 @@ public class RequestMapper {
 			}else {
 				ctx.status(HttpCode.FORBIDDEN);
 			}
-			
-			
-			
+							
 		});
 		
 		app.get("/manager/{uniqname}", ctx->{
@@ -162,8 +141,7 @@ public class RequestMapper {
 			}else {
 				ctx.status(HttpCode.FORBIDDEN);
 			}
-			
-			
+						
 		});
 		
 		
@@ -176,14 +154,10 @@ public class RequestMapper {
 			}else {
 				ctx.status(HttpCode.FORBIDDEN);
 			}
-			
-			
-			
+								
 		} );
-		
-		
-		app.get("/api/reimbursements/all",ctx->{
-			
+				
+		app.get("/api/reimbursements/all",ctx->{			
 			
 			boolean access = AuthenticationController.managerCheck(ctx);
 			
@@ -202,12 +176,10 @@ public class RequestMapper {
 				rController.allReimbursementByUsername(ctx);
 			}else {
 				ctx.status(HttpCode.FORBIDDEN);
-			}
-			
+			}			
 			
 		});
-		
-		
+				
 	}
 	
 }

@@ -25,5 +25,4 @@ public interface ReimbursementDAO {
 	public List<Reimbursement> allReimbursment();
 	
 	public List<Reimbursement> reimburstmentAllByUsername(String username);
-
 }

@@ -4,15 +4,17 @@ import java.util.List;
 
 import com.ers.dao.ImplReimbursementDAO;
 import com.ers.dao.ReimbursementDAO;
+import com.ers.models.Employee;
 import com.ers.models.Reimbursement;
 
 public class ReimbursementService {
 	
 	private static ReimbursementDAO rDao = new ImplReimbursementDAO();
 	
-	public void requestSubmit(String username, double totalCost, String expenseType, String paymentType) {
+	public void requestSubmit(Employee employee, double totalCost, String expenseType, String paymentType) {
 		
-		Reimbursement newReimbursment = new Reimbursement(-1, -1, username, totalCost, expenseType, paymentType);
+		
+		Reimbursement newReimbursment = new Reimbursement(-1, employee.getUserid(), employee.getUsername(), totalCost, expenseType, paymentType);
 		
 		rDao.createNewReimbursment(newReimbursment);
 	}
