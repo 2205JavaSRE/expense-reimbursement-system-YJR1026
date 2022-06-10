@@ -28,15 +28,13 @@ public class ReimbursementController {
 		ctx.status(HttpCode.CREATED);
 		ctx.result("New Reimbursement submitted by: " + employee.getUsername());
 		
-		
-		
 	}
 	
-	public void allReimbursment(Context ctx) {
+	public void allReimbursement(Context ctx) {
 		
-		List<Reimbursement> reimbursmentList = rService.allReimbursment();
+		List<Reimbursement> reimbursementList = rService.allReimbursement();
 		
-		ctx.json(reimbursmentList);
+		ctx.json(reimbursementList);
 		
 	}
 	public void statusCheck(Context ctx) {
@@ -46,8 +44,8 @@ public class ReimbursementController {
 
 		Employee u = ctx.sessionAttribute("user");
 		if (u.getUsername().equals(name)) {
-			List<Reimbursement> reimbursmentListByStatus =rService.reimburstmentByUsernameandStatus(name,status);
-			ctx.json(reimbursmentListByStatus);
+			List<Reimbursement> reimbursementListByStatus =rService.reimbursementByUsernameandStatus(name,status);
+			ctx.json(reimbursementListByStatus);
 			ctx.status(HttpStatus.ACCEPTED_202);
 		}else {
 			ctx.result("you do not have access here");
@@ -62,15 +60,13 @@ public class ReimbursementController {
 			Employee u = ctx.sessionAttribute("user");
 			
 			if (u.getUsername().equals(name)) {
-				List<Reimbursement> reimbursmentListByUsername =rService.reimburstmentByUsername(name);
-				ctx.json(reimbursmentListByUsername);
+				List<Reimbursement> reimbursementListByUsername =rService.reimbursementByUsername(name);
+				ctx.json(reimbursementListByUsername);
 				ctx.status(HttpStatus.ACCEPTED_202);
 			}else{
 				ctx.result("you do not have access here");
 				ctx.status(HttpCode.FORBIDDEN);
 			}
-		
-		
 		
 	}
 	
@@ -78,12 +74,10 @@ public class ReimbursementController {
 		
 		String uniqname = ctx.pathParam("uniqname");
 		
-		List<Reimbursement> reimbursmentListByUsername =rService.reimburstmentByUsername(uniqname);
-			ctx.json(reimbursmentListByUsername);
+		List<Reimbursement> reimbursementListByUsername =rService.reimbursementByUsername(uniqname);
+			ctx.json(reimbursementListByUsername);
 			ctx.status(HttpStatus.ACCEPTED_202);
 
-	
-	
 	
 }	
 	public void managerStatusCheck(Context ctx) {
@@ -91,41 +85,36 @@ public class ReimbursementController {
 	String name = ctx.pathParam("username");
 	String status = ctx.pathParam("status");
 
-		List<Reimbursement> reimbursmentListByStatus =rService.reimburstmentByUsernameandStatus(name,status);
-		ctx.json(reimbursmentListByStatus);
+		List<Reimbursement> reimbursementListByStatus =rService.reimbursementByUsernameandStatus(name,status);
+		ctx.json(reimbursementListByStatus);
 		ctx.status(HttpStatus.ACCEPTED_202);
-	
 	
 }
 	
-	
-	
 	public void paymentStatusUpdate(Context ctx) {
 		
-		Reimbursement jsonReimbursment =ctx.bodyAsClass(Reimbursement.class);
+		Reimbursement jsonReimbursement =ctx.bodyAsClass(Reimbursement.class);
 		
-		rService.paymentUpdate(jsonReimbursment.getReimbursementId(), jsonReimbursment.getPaymentStatus());
+		rService.paymentUpdate(jsonReimbursement.getReimbursementId(), jsonReimbursement.getPaymentStatus());
 		ctx.result("Payment Status Updated");
 		ctx.status(HttpStatus.ACCEPTED_202);
 	}
 	
 	public void allReimbursement(Context ctx) {
 		
-		List<Reimbursement> reimbursmentList = rService.allReimbursement();
+		List<Reimbursement> reimbursementList = rService.allReimbursement();
 		
-		ctx.json(reimbursmentList);
+		ctx.json(reimbursementList);
 		
 	}
 	
 	public void allReimbursementByUsername(Context ctx) {
 		
-		
-		
 		String uniqname = ctx.pathParam("uniqname");
 		
-		List<Reimbursement> reimbursmentList = rService.reimburstmentAllByUsername(uniqname);
+		List<Reimbursement> reimbursementList = rService.reimbursementAllByUsername(uniqname);
 		
-		ctx.json(reimbursmentList);
+		ctx.json(reimbursementList);
 		
 	}
 
